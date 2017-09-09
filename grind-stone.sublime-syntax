@@ -48,17 +48,22 @@ contexts:
                 1: punctuation.section.embedded.ignore.end.stone
               pop: true
 
-        - match: '(\s{0}|^)(\@)\b(asset|babel|block|break|coffee|component|continue|css|debug|dump|each|elseif|extends|for|foreach|forelse|hasSection|if|include|js|layout|less|macro|push|sass|scss|script|section|set|slot|stack|styl|style|stylus|unless|while|yield)\b(?=(|\s*|)\()'
+        - match: '(\s{0}|^)(\@)\b(component|section|slot|yield)\b(?=(|\s*|)\()'
           captures:
             0: punctuation.section.embedded.js
             2: keyword.control.flow.js
             3: keyword.control.flow.js
           push:
-            - meta_scope: custom.compiler.stone.js
-            - meta_content_scope: source.js.stone
-            - match: '(?<=\))'
-              pop: true
-            - include: 'scope:source.js'
+            - meta_scope: meta.stone.symbol.js
+            - include: directive_args
+
+        - match: '(\s{0}|^)(\@)\b(asset|babel|block|break|coffee|continue|css|debug|dump|each|elseif|extends|for|foreach|forelse|hasSection|if|include|js|layout|less|macro|push|sass|scss|script|set|stack|styl|style|stylus|unless|while)\b(?=(|\s*|)\()'
+          captures:
+            0: punctuation.section.embedded.js
+            2: keyword.control.flow.js
+            3: keyword.control.flow.js
+          push:
+            - include: directive_args
 
         - match: '(\s{0}|^)(\@)\b(break|continue|else|empty|endblock|endcomponent|endfor|endforeach|endforelse|endif|endmacro|endpush|endsection|endslot|endspaceless|endunless|endwhile|parent|setup|show|spaceless|super)\b'
           scope: custom.compiler.stone.js
@@ -73,11 +78,7 @@ contexts:
             0: support.function
             2: constant.other.inline-data.html
           push:
-            - meta_scope: custom.compiler.stone.js
-            - meta_content_scope: source.js.stone
-            - match: '(?<=\))'
-              pop: true
-            - include: 'scope:source.js'
+            - include: directive_args
 
         - match: '(\s{0}|^)(\@)\b([a-zA-Z_]+)\b(\s?)\b'
           scope: custom.compiler.stone.js
@@ -85,3 +86,10 @@ contexts:
             0: support.function
             2: constant.other.inline-data.html
           pop: false
+
+  directive_args:
+    - meta_scope: custom.compiler.stone.js
+    - meta_content_scope: source.js.stone
+    - match: '(?<=\))'
+      pop: true
+    - include: 'scope:source.js'
