@@ -2,7 +2,7 @@
 ---
 name: Grind Stone
 file_extensions: [ stone ]
-scope: text.stone
+scope: source.stone
 contexts:
   main:
     - match: ''
