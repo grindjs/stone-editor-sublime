@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+@macro('${1:name}'${2:, ${3:arg}})
+	${0:{{-- expr --\}\}}
+@endmacro
+]]></content>
+	<tabTrigger>macro</tabTrigger>
+	<scope>text.html.stone</scope>
+</snippet>

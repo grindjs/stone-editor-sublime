@@ -1,0 +1,7 @@
+<snippet>
+	<content><![CDATA[
+@endmacro$0
+]]></content>
+	<tabTrigger>endmacro</tabTrigger>
+	<scope>text.html.stone</scope>
+</snippet>

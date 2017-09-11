@@ -1,0 +1,7 @@
+<snippet>
+	<content><![CDATA[
+@endfor$0
+]]></content>
+	<tabTrigger>endfor</tabTrigger>
+	<scope>text.html.stone</scope>
+</snippet>

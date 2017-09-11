@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+@component('${1:component}', '${2:data}')
+	${3:{{-- expr --\}\}}
+@endcomponent
+]]></content>
+	<tabTrigger>component</tabTrigger>
+	<scope>text.html.stone</scope>
+</snippet>

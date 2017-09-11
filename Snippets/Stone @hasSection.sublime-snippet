@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[
+@hasSection('${1:name}')
+	${2:{{-- true expr --\}\}}
+@else
+	${3:{{-- false expr --\}\}}
+@endif$0
+]]></content>
+	<tabTrigger>hasSection</tabTrigger>
+	<scope>text.html.stone</scope>
+</snippet>

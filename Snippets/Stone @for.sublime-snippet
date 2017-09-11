@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+@for(const ${1:item} of ${2:items})
+	${3:{{-- expr --\}\}}
+@endfor$0
+]]></content>
+	<tabTrigger>for</tabTrigger>
+	<scope>text.html.stone</scope>
+</snippet>

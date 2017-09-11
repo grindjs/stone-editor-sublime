@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+@slot('${1:slot}')
+	${0:{{-- expr --\}\}}
+@endslot
+]]></content>
+	<tabTrigger>slot</tabTrigger>
+	<scope>text.html.stone</scope>
+</snippet>

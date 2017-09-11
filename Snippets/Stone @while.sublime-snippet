@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+@while(${1:condition})
+	${0:{{-- expr --\}\}}
+@endwhile
+]]></content>
+	<tabTrigger>while</tabTrigger>
+	<scope>text.html.stone</scope>
+</snippet>
