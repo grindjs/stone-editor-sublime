@@ -87,9 +87,75 @@ contexts:
             2: constant.other.inline-data.html
           pop: false
 
+        - match: '(</?)(?!(?:a|abbr|address|area|article|aside|audio|b|bdi|bdo|blockquote|body|br|button|canvas|caption|cite|code|col|colgroup|content|data|datalist|dd|del|details|dfn|dialog|div|dl|dt|element|em|embed|fieldset|figcaption|figure|footer|form|h1–h6|header|hgroup|hr|html|i|img|input|ins|kbd|label|legend|li|link|main|map|mark|menu|menuitem|meta|meter|nav|noscript|object|ol|optgroup|option|output|p|param|pre|progress|q|rp|rt|rtc|ruby|s|samp|script|section|select|shadow|slot|small|source|span|strong|style|sub|summary|sup|table|tbody|td|template|textarea|tfoot|th|thead|time|tr|track|u|ul|var|video|wbr)\b)([a-zA-Z0-9:-]+)'
+          captures:
+            1: punctuation.definition.tag.begin.html
+            2: entity.name.tag.other.html
+          push:
+            - meta_scope: meta.tag.other.html
+            - match: '(?: ?/)?>'
+              scope: punctuation.definition.tag.end.html
+              pop: true
+            - include: tagged_component
+
   directive_args:
     - meta_scope: custom.compiler.stone.js
     - meta_content_scope: source.js.stone
     - match: '(?<=\))'
       pop: true
     - include: 'scope:source.js'
+
+  tagged_component:
+    - match: '(?:^|\s+)(([a-zA-Z0-9:\-_.]+)\s*(=)\s*)'
+      captures:
+        1: meta.attribute-with-value.html
+        2: entity.other.attribute-name.html
+        3: punctuation.separator.key-value.html
+      push:
+        - match: '{'
+          scope: punctuation.definition.string.begin.js
+          set:
+            - meta_scope: meta.attribute-with-js-value.html
+            - match: '}'
+              scope: punctuation.definition.string.end.js
+              pop: true
+            - include: 'scope:source.js'
+        - match: '"'
+          scope: punctuation.definition.string.begin.html
+          set:
+            - meta_scope: meta.attribute-with-value.html string.quoted.double.html
+            - match: '"'
+              scope: punctuation.definition.string.end.html
+              pop: true
+            - include: attribute-entities
+        - match: "'"
+          scope: punctuation.definition.string.begin.html
+          set:
+            - meta_scope: meta.attribute-with-value.html string.quoted.single.html
+            - match: "'"
+              scope: punctuation.definition.string.end.html
+              pop: true
+            - include: attribute-entities
+        - match: ''
+          pop: true
+
+    - match: '(?:^|\s+)(([a-zA-Z0-9:\-_.]+))'
+      captures:
+        1: meta.attribute-with-value.html
+        2: entity.other.attribute-name.html
+      push:
+        - match: ''
+          pop: true
+
+    - match: '\{\s*\.{3}-?'
+      captures:
+        0: punctuation.section.embedded.begin.stone
+      push:
+        - meta_scope: entity.name.tag.stone
+        - meta_content_scope: source.js.stone
+        - match: '-?\}'
+          captures:
+            0: punctuation.section.embedded.end.stone
+            1: punctuation.section.embedded.end.stone
+          pop: true
+        - include: 'scope:source.js'

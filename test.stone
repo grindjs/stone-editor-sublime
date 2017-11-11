@@ -11,6 +11,12 @@ The current UNIX timestamp is {{ Date.now() }}.
 {{-- Do not escape data --}}
 Hello, {!! name || '<i>Default</i>' !!}.
 
+{{-- Tagged components --}}
+<p class="testing" date={Date.now()}></p>
+<grind-tag date={Date.now()} data="testing"></grind-tag>
+<grind date={Date.now()} required data="testing"></grind>
+<grind date={Date.now()} data="testing" { ...({ grind: 'framework', bool: true }) } />
+
 @include('header')
 
 @include('footer')
