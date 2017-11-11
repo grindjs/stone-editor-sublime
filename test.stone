@@ -17,6 +17,10 @@ Hello, {!! name || '<i>Default</i>' !!}.
 <grind date={Date.now()} required data="testing"></grind>
 <grind date={Date.now()} data="testing" { ...({ grind: 'framework', bool: true }) } />
 
+<grind>
+	<slot:title><h1>Grind</h1></slot:title>
+</grind>
+
 @include('header')
 
 @include('footer')

@@ -98,6 +98,17 @@ contexts:
               pop: true
             - include: tagged_component
 
+        - match: '(</?)(slot):([a-zA-Z0-9_]+)'
+          captures:
+            1: punctuation.definition.tag.begin.html
+            2: entity.name.tag.other.html
+            3: entity.other.attribute-name.html
+          push:
+            - meta_scope: meta.tag.other.html
+            - match: '(?: ?/)?>'
+              scope: punctuation.definition.tag.end.html
+              pop: true
+
   directive_args:
     - meta_scope: custom.compiler.stone.js
     - meta_content_scope: source.js.stone
